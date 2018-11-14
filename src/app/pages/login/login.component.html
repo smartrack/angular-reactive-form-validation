@@ -1,18 +1,21 @@
 <div class="ui grid">
   <div class="ui four wide centered column">
-    <form class="ui form" [formGroup]="loginForm">
-
-      <div class="ui error message" *ngIf="loginForm.submitted && loginForm.controls?.username.errors">
-        <p>Please enter a login name.</p>
+    <form name="loginForm" class="ui form" novalidate [formGroup]="loginForm" (submit)="handleFormSubmit()">
+      <h1 class="ui dividing header medium">Login Form</h1>
+      <div class="ui error message" role="alert" *ngIf="loginForm?.submitted && loginForm.controls?.username.errors">
+        Please enter a login name.
       </div>
       
-      <div class="required field error" [ngClass]="{'error': (loginForm.submitted && loginForm.controls?.username.invalid) || (loginForm.controls?.username.touched && loginForm.controls?.username.invalid) }">
-        <label>Login name</label>
-        <input type="text" placeholder="username" formControlName="username">
+      <div class="required field error" [ngClass]="{'error': (loginForm?.submitted && loginForm.controls?.username.invalid) || (loginForm.controls?.username.touched && loginForm.controls?.username.invalid) }">
+        <label for="loginField">Login name</label>
+        <input id="loginField" type="text" placeholder="username" formControlName="username">        
+        <p *ngIf="loginForm.controls?.username?.touched && loginForm.controls?.username?.errors?.required" class="field-error">Please enter username</p>
       </div>
 
-      <button class="ui button primary" type="submit">Submit</button>
-      <button class="ui button" type="reset">Clear</button>
+      <div class="field">
+          <button class="ui button primary" type="submit">Submit</button>
+          <button class="ui button" type="reset">Clear</button>
+      </div>      
 
     </form>
   </div>

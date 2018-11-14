@@ -1,0 +1,19 @@
+<div class="ui grid">
+  <div class="ui four wide centered column">
+    <form class="ui form" [formGroup]="loginForm">
+
+      <div class="ui error message" *ngIf="loginForm.submitted && loginForm.controls?.username.errors">
+        <p>Please enter a login name.</p>
+      </div>
+      
+      <div class="required field error" [ngClass]="{'error': (loginForm.submitted && loginForm.controls?.username.invalid) || (loginForm.controls?.username.touched && loginForm.controls?.username.invalid) }">
+        <label>Login name</label>
+        <input type="text" placeholder="username" formControlName="username">
+      </div>
+
+      <button class="ui button primary" type="submit">Submit</button>
+      <button class="ui button" type="reset">Clear</button>
+
+    </form>
+  </div>
+</div>
